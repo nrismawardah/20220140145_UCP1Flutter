@@ -18,6 +18,28 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    final _formKey = GlobalKey<FormState>();
+    return Scaffold(
+      body: SafeArea(child: Padding(padding: const EdgeInsets.all(16.0),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        spacing: 10,
+        children: [
+          Column(
+            spacing: 10,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              CircleAvatar(
+                radius: 50,
+                backgroundImage: AssetImage('assets/images/logo.jpg'),
+              ),
+              Text('Selamat Datang Kembali',
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold))
+            ],
+          )
+        ],
+      ),)),
+    );
   }
 }
