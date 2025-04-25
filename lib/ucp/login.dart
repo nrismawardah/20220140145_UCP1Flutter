@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:ucp1/ucp/home.dart';
+import 'package:ucp1/ucp/register.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -29,7 +31,6 @@ class _LoginPageState extends State<LoginPage> {
             spacing: 10,
             children: [
               Column(
-                spacing: 10,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   CircleAvatar(
@@ -69,6 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                             return null;
                           },
                         ),
+                        const SizedBox(height: 5),
                         Text(
                           'Password',
                           style: TextStyle(fontWeight: FontWeight.bold),
@@ -91,6 +93,59 @@ class _LoginPageState extends State<LoginPage> {
                             }
                             return null;
                           },
+                        ),
+                        const SizedBox(height: 30),
+                        ElevatedButton(
+                          onPressed: () {
+                            if (_formKey.currentState!.validate()) {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => const HomePage(),
+                                ),
+                              );
+                            }
+                          },
+                          child: const Text(
+                            'Masuk',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Color(0xFF6985AC),
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 15,
+                              horizontal: 165,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Text('Belum memiliki akun? Silahkan'),
+                            TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const RegisterPage(),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Daftar disini!',
+                                style: TextStyle(
+                                  color: Color(0xFF6985AC),
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ],
                     ),
