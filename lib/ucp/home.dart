@@ -7,7 +7,97 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: Column(
+        children: [
+          Container(
+            color: Color(0xFF6985AC),
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Row(
+                  children: [
+                    CircleAvatar(
+                      radius: 40,
+                      backgroundImage: AssetImage('assets/images/s.jpeg'),
+                    ),
+                    const SizedBox(width: 20),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Selamat Datang',
+                          style: TextStyle(fontSize: 16, color: Colors.white),
+                        ),
+                        Text(
+                          email,
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.pop(context, '/login');
+                  },
+                  icon: Icon(Icons.logout, color: Colors.white),
+                ),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(10),
+              child: Image.asset('assets/images/banner.jpeg'),
+            ),
+          ),
+          const SizedBox(height: 30),
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Row(
+                    children: [
+                      Expanded(
+                        child: MenuCard(
+                          icon: Icons.add_task,
+                          title: 'Data Piket',
+                          onTap: () {},
+                        ),
+                      ),
+                      const SizedBox(width: 20),
+                      Expanded(
+                        child: MenuCard(
+                          icon: Icons.grid_view,
+                          title: 'Data Pelanggan',
+                          onTap: () {},
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(width: 20),
+                  MenuCard(
+                    icon: Icons.receipt_long_outlined,
+                    title: 'Barang Masuk/Keluar',
+                    onTap: () {},
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }
 

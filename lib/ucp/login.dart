@@ -132,7 +132,7 @@ class _LoginPageState extends State<LoginPage> {
                             backgroundColor: Color(0xFF6985AC),
                             padding: const EdgeInsets.symmetric(
                               vertical: 15,
-                              horizontal: 169,
+                              horizontal: 168,
                             ),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10),
