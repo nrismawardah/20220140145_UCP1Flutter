@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucp1/ucp/piket/tambah_piket.dart';
 
 class HomePage extends StatelessWidget {
   final String email;
@@ -72,7 +73,15 @@ class HomePage extends StatelessWidget {
                         child: MenuCard(
                           icon: Icons.add_task,
                           title: 'Data Piket',
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder:
+                                    (context) => TambahPiketPage(email: email),
+                              ),
+                            );
+                          },
                         ),
                       ),
                       const SizedBox(width: 20),
