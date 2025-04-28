@@ -14,6 +14,9 @@ class _RegisterPageState extends State<RegisterPage> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController konfirPasswordController = TextEditingController();
 
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
+
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
