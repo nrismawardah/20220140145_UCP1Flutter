@@ -144,26 +144,41 @@ class _TambahPiketPageState extends State<TambahPiketPage> {
               ),
             ),
             const SizedBox(height: 12),
-            ..._daftarTugas.map(
-              (tugas) => Card(
-                color: Color(0xFF6985AC),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: ListTile(
-                  title: Text(
-                    tugas,
-                    style: const TextStyle(color: Colors.white),
+            _daftarTugas.isEmpty
+                ? SizedBox(
+                  height: 400,
+                  child: Center(
+                    child: Text(
+                      'Belum ada data',
+                      style: TextStyle(fontSize: 13),
+                    ),
                   ),
-                  trailing: const Icon(
-                    Icons.arrow_forward_ios,
-                    color: Colors.white,
-                    size: 15,
-                  ),
-                  onTap: () {},
+                )
+                : Column(
+                  children:
+                      _daftarTugas
+                          .map(
+                            (tugas) => Card(
+                              color: Color(0xFF6985AC),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              child: ListTile(
+                                title: Text(
+                                  tugas,
+                                  style: const TextStyle(color: Colors.white),
+                                ),
+                                trailing: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  color: Colors.white,
+                                  size: 15,
+                                ),
+                                onTap: () {},
+                              ),
+                            ),
+                          )
+                          .toList(),
                 ),
-              ),
-            ),
           ],
         ),
       ),
