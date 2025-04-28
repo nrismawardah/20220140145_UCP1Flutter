@@ -12,6 +12,9 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+
+  bool _obscurePassword = true;
 
   @override
   void initState() {
@@ -20,7 +23,6 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    final _formKey = GlobalKey<FormState>();
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -37,15 +39,16 @@ class _LoginPageState extends State<LoginPage> {
                     radius: 50,
                     backgroundImage: AssetImage('assets/images/logo.jpg'),
                   ),
+                  const SizedBox(height: 10),
                   Text(
                     'Selamat Datang Kembali',
                     style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
                   ),
                   Form(
+                    key: _formKey,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       spacing: 10,
-                      key: _formKey,
                       children: [
                         const SizedBox(height: 20),
                         Text(
@@ -56,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                           controller: emailController,
                           decoration: const InputDecoration(
                             prefixIcon: Icon(Icons.email),
-                            labelText: 'Email',
+                            hintText: 'Email',
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
@@ -77,14 +80,26 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         TextFormField(
                           controller: passwordController,
-                          obscureText: true,
-                          decoration: const InputDecoration(
-                            prefixIcon: Icon(Icons.lock),
-                            labelText: 'Password',
-                            border: OutlineInputBorder(
+                          obscureText: _obscurePassword,
+                          decoration: InputDecoration(
+                            prefixIcon: const Icon(Icons.lock),
+                            hintText: 'Password',
+                            border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                                 Radius.circular(10),
                               ),
+                            ),
+                            suffixIcon: IconButton(
+                              icon: Icon(
+                                _obscurePassword
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                              ),
+                              onPressed: () {
+                                setState(() {
+                                  _obscurePassword = !_obscurePassword;
+                                });
+                              },
                             ),
                           ),
                           validator: (value) {
@@ -138,7 +153,7 @@ class _LoginPageState extends State<LoginPage> {
                                 );
                               },
                               child: const Text(
-                                'Daftar disini!',
+                                'daftar disini!',
                                 style: TextStyle(
                                   color: Color(0xFF6985AC),
                                   fontWeight: FontWeight.bold,
