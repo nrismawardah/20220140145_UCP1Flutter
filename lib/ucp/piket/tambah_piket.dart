@@ -13,7 +13,13 @@ class _TambahPiketPageState extends State<TambahPiketPage> {
   final TextEditingController _tugasController = TextEditingController();
   DateTime? _selectedDate;
   List<String> _daftarTugas = [];
-  
+
+  @override
+  void initState() {
+    super.initState();
+    _namaController.text = widget.email;
+  }
+
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
