@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TambahPiketPage extends StatefulWidget {
-  const TambahPiketPage({super.key});
-
+  final String email;
+  const TambahPiketPage({Key? key, required this.email}) : super(key: key);
+  
   @override
   State<TambahPiketPage> createState() => _TambahPiketPageState();
 }
