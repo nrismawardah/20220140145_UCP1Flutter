@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:ucp1/ucp/piket/detail_piket.dart';
 
 class TambahPiketPage extends StatefulWidget {
   final String email;
@@ -173,7 +174,24 @@ class _TambahPiketPageState extends State<TambahPiketPage> {
                                   color: Colors.white,
                                   size: 15,
                                 ),
-                                onTap: () {},
+                                onTap: () {
+                                  if (_selectedDate != null) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder:
+                                            (context) => DetailPiketPage(
+                                              email: _namaController.text,
+                                              tanggal: DateFormat(
+                                                'EEEE, dd MMMM yyyy',
+                                                'id_ID',
+                                              ).format(_selectedDate!),
+                                              tugas: tugas,
+                                            ),
+                                      ),
+                                    );
+                                  }
+                                },
                               ),
                             ),
                           )
