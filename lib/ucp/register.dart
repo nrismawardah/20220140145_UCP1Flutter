@@ -234,9 +234,6 @@ class _RegisterPageState extends State<RegisterPage> {
                                       if (value == null || value.isEmpty) {
                                         return 'Konfirmasi Password tidak boleh kosong';
                                       }
-                                      if (value != passwordController.text) {
-                                        return 'Password tidak sama';
-                                      }
                                       return null;
                                     },
                                   ),
@@ -249,12 +246,25 @@ class _RegisterPageState extends State<RegisterPage> {
                         ElevatedButton(
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
-                              Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const HomePage(),
-                                ),
-                              );
+                              if (konfirPasswordController.text !=
+                                  passwordController.text) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Password tidak sama',
+                                      textAlign: TextAlign.center,                                      
+                                    ),
+                                    backgroundColor: Colors.red,
+                                  ),
+                                );
+                              } else {
+                                Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const HomePage(),
+                                  ),
+                                );
+                              }
                             }
                           },
                           child: const Text(
