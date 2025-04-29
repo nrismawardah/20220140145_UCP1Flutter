@@ -15,6 +15,15 @@ class _TambahPelangganPageState extends State<TambahPelangganPage> {
   final TextEditingController _provinsiController = TextEditingController();
   final TextEditingController _kodePosController = TextEditingController();
   
+  void _resetForm() {
+    _namaController.clear();
+    _emailController.clear();
+    _noHpController.clear();
+    _alamatController.clear();
+    _provinsiController.clear();
+    _kodePosController.clear();
+  }
+  
   @override
   Widget build(BuildContext context) {
     return const Placeholder();
