@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:ucp1/ucp/pelanggan/tambah_pelanggan.dart';
 import 'package:ucp1/ucp/piket/tambah_piket.dart';
 import 'package:ucp1/ucp/barang/tambah_barang.dart';
+import 'package:ucp1/ucp/login.dart';
 
 class HomePage extends StatelessWidget {
   final String email;
@@ -47,7 +48,9 @@ class HomePage extends StatelessWidget {
                 ),
                 IconButton(
                   onPressed: () {
-                    Navigator.pop(context, '/login');
+                    Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context) => const LoginPage()),
+                    (Route<dynamic> route) => false,
+                    );
                   },
                   icon: Icon(Icons.logout, color: Colors.white),
                 ),
