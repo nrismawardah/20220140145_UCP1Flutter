@@ -4,7 +4,9 @@ import 'package:intl/date_symbol_data_local.dart';
 import 'package:ucp1/ucp/barang/detail_barang.dart';
 
 class TambahBarangPage extends StatefulWidget {
-  const TambahBarangPage({Key? key}) : super(key: key);
+  final String email;
+
+  const TambahBarangPage({Key? key, required this.email}) : super(key: key);
 
   @override
   State<TambahBarangPage> createState() => _TambahBarangPageState();
@@ -204,7 +206,7 @@ class _TambahBarangPageState extends State<TambahBarangPage> {
                         _selectedDate != null) {
                       int jumlahBarang = int.parse(_jumlahController.text);
                       int totalHarga = jumlahBarang * _hargaSatuan;
-                      Navigator.push(
+                      Navigator.pushReplacement(
                         context,
                         MaterialPageRoute(
                           builder:
@@ -215,6 +217,7 @@ class _TambahBarangPageState extends State<TambahBarangPage> {
                                 jumlahBarang: jumlahBarang,
                                 totalHarga: totalHarga,
                                 hargaSatuan: _hargaSatuan,
+                                email: widget.email,
                               ),
                         ),
                       );
