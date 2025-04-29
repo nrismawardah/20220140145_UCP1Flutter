@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ucp1/ucp/pelanggan/tambah_pelanggan.dart';
 import 'package:ucp1/ucp/piket/tambah_piket.dart';
+import 'package:ucp1/ucp/barang/tambah_barang.dart';
 
 class HomePage extends StatelessWidget {
   final String email;
@@ -106,7 +107,14 @@ class HomePage extends StatelessWidget {
                   MenuCard(
                     icon: Icons.receipt_long_outlined,
                     title: 'Barang Masuk/Keluar',
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => TambahBarangPage(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),

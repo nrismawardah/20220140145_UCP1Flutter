@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:ucp1/ucp/barang/detail_barang.dart';
 
 class TambahBarangPage extends StatefulWidget {
   const TambahBarangPage({Key? key}) : super(key: key);
@@ -26,6 +27,8 @@ class _TambahBarangPageState extends State<TambahBarangPage> {
     'Sepatu': 70000,
   };
 
+  bool _tanggalError = false;
+
   @override
   void initState() {
     super.initState();
@@ -49,6 +52,191 @@ class _TambahBarangPageState extends State<TambahBarangPage> {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color(0xFF6985AC),
+        toolbarHeight: 90,
+        title: const Text('Pendataan Barang'),
+        centerTitle: true,
+      ),
+      body: Form(
+        key: _formKey,
+        child: Padding(
+          padding: const EdgeInsets.all(20),
+          child: Column(
+            spacing: 5,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Tanggal Transaksi',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              InkWell(
+                onTap: () async {
+                  await _selectDate(context);
+                  setState(() {
+                    _tanggalError = false;
+                  });
+                },
+                child: InputDecorator(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(16),
+                    ),
+                    suffixIcon: const Icon(Icons.calendar_today),
+                    errorText:
+                        _tanggalError ? 'Tanggal tidak boleh kosong' : null,
+                  ),
+                  child: Text(
+                    _selectedDate == null
+                        ? 'Pilih Tanggal'
+                        : DateFormat(
+                          'EEEE, dd MMMM yyyy',
+                          'id_ID',
+                        ).format(_selectedDate!),
+                  ),
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Jenis Transaksi',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              DropdownButtonFormField<String>(
+                value: _selectedJenisTransaksi,
+                hint: const Text('Jenis Transaksi'),
+                items:
+                    _jenisTransaksiList
+                        .map(
+                          (item) =>
+                              DropdownMenuItem(value: item, child: Text(item)),
+                        )
+                        .toList(),
+                onChanged:
+                    (val) => setState(() => _selectedJenisTransaksi = val),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                validator:
+                    (value) =>
+                        value == null
+                            ? 'Jenis Transaksi tidak boleh kosong'
+                            : null,
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Jenis Barang',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              DropdownButtonFormField<String>(
+                value: _selectedJenisBarang,
+                hint: const Text('Jenis Barang'),
+                items:
+                    _barangHargaMap.keys
+                        .map(
+                          (item) =>
+                              DropdownMenuItem(value: item, child: Text(item)),
+                        )
+                        .toList(),
+                onChanged: (val) {
+                  setState(() {
+                    _selectedJenisBarang = val;
+                    _hargaSatuan = _barangHargaMap[val]!;
+                  });
+                },
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                ),
+                validator:
+                    (value) =>
+                        value == null
+                            ? 'Jenis Barang tidak boleh kosong'
+                            : null,
+              ),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _jumlahController,
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        hintText: 'Jumlah Barang',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                      ),
+                      validator:
+                          (value) =>
+                              value == null || value.isEmpty
+                                  ? 'Jumlah barang tidak boleh kosong'
+                                  : null,
+                    ),
+                  ),
+                  const SizedBox(width: 8),
+                  Expanded(
+                    child: TextField(
+                      readOnly: true,
+                      decoration: InputDecoration(
+                        prefixText: 'Rp. ',
+                        labelText: 'Harga Satuan',
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      controller: TextEditingController(
+                        text: _hargaSatuan.toString(),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: 30),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (_formKey.currentState!.validate() &&
+                        _selectedDate != null) {
+                      int jumlahBarang = int.parse(_jumlahController.text);
+                      int totalHarga = jumlahBarang * _hargaSatuan;
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder:
+                              (context) => DetailBarangPage(
+                                tanggal: _selectedDate!,
+                                jenisTransaksi: _selectedJenisTransaksi!,
+                                jenisBarang: _selectedJenisBarang!,
+                                jumlahBarang: jumlahBarang,
+                                totalHarga: totalHarga,
+                                hargaSatuan: _hargaSatuan,
+                              ),
+                        ),
+                      );
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Color(0xFF6985AC),
+                    minimumSize: const Size(double.infinity, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                  ),
+                  child: const Text(
+                    'Submit',
+                    style: TextStyle(fontSize: 16, color: Colors.white),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }
