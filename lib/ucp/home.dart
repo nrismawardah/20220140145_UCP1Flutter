@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucp1/ucp/pelanggan/tambah_pelanggan.dart';
 import 'package:ucp1/ucp/piket/tambah_piket.dart';
 
 class HomePage extends StatelessWidget {
@@ -89,7 +90,14 @@ class HomePage extends StatelessWidget {
                         child: MenuCard(
                           icon: Icons.grid_view,
                           title: 'Data Pelanggan',
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TambahPelangganPage(),
+                              ),
+                            );
+                          },
                         ),
                       ),
                     ],
