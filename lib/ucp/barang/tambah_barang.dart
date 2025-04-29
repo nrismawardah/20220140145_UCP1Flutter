@@ -77,7 +77,7 @@ class _TambahBarangPageState extends State<TambahBarangPage> {
                 onTap: () async {
                   await _selectDate(context);
                   setState(() {
-                    _tanggalError = false;
+                    _tanggalError = _selectedDate == null;
                   });
                 },
                 child: InputDecorator(
@@ -202,6 +202,10 @@ class _TambahBarangPageState extends State<TambahBarangPage> {
                 width: double.infinity,
                 child: ElevatedButton(
                   onPressed: () {
+                    setState(() {
+                      _tanggalError = _selectedDate == null;
+                    });
+
                     if (_formKey.currentState!.validate() &&
                         _selectedDate != null) {
                       int jumlahBarang = int.parse(_jumlahController.text);
