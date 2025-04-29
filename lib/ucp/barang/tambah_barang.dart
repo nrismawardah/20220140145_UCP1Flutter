@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:intl/date_symbol_data_local.dart';
 
 class TambahBarangPage extends StatefulWidget {
   const TambahBarangPage({Key? key}) : super(key: key);
@@ -23,6 +25,27 @@ class _TambahBarangPageState extends State<TambahBarangPage> {
     'Sleeping Bag': 50000,
     'Sepatu': 70000,
   };
+
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting();
+  }
+
+  Future<void> _selectDate(BuildContext context) async {
+    final DateTime? picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(),
+      firstDate: DateTime(2020),
+      lastDate: DateTime(2101),
+      locale: const Locale('id', 'ID'),
+    );
+    if (picked != null && picked != _selectedDate) {
+      setState(() {
+        _selectedDate = picked;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
