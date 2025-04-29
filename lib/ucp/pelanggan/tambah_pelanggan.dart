@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:ucp1/ucp/pelanggan/detail_pelanggan.dart';
 
 class TambahPelangganPage extends StatefulWidget {
   const TambahPelangganPage({super.key});
@@ -221,7 +222,22 @@ class _TambahPelangganPageState extends State<TambahPelangganPage> {
                   ),
                 ),
                 onPressed: () {
-                  if (_formKey.currentState!.validate()) {}
+                  if (_formKey.currentState!.validate()) {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder:
+                            (contex) => DetailPelangganPage(
+                              nama: _namaController.text,
+                              email: _emailController.text,
+                              noHp: _noHpController.text,
+                              alamat: _alamatController.text,
+                              provinsi: _provinsiController.text,
+                              kodePos: _kodePosController.text,
+                            ),
+                      ),
+                    );
+                  }
                 },
                 child: const Text(
                   'Simpan',
@@ -234,10 +250,7 @@ class _TambahPelangganPageState extends State<TambahPelangganPage> {
                   padding: const EdgeInsets.symmetric(vertical: 18),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16),
-                    side: BorderSide(
-                      color: Colors.grey,
-                      width: 1
-                    )
+                    side: BorderSide(color: Colors.grey, width: 1),
                   ),
                 ),
                 onPressed: _resetForm,
