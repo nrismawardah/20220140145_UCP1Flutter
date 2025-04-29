@@ -228,7 +228,7 @@ class _TambahPelangganPageState extends State<TambahPelangganPage> {
                   style: TextStyle(color: Colors.white, fontSize: 16),
                 ),
               ),
-              const SizedBox(height: 12),
+              const SizedBox(height: 30),
               ElevatedButton(
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 18),
